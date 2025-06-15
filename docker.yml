@@ -1,0 +1,24 @@
+- name: Configure Docker Machine
+  hosts: docker
+  become: true
+
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+
+    - name: Start Docker service
+      service:
+        name: docker
+        state: started
+
+    - name: Run Redis container
+      command: docker run -d --name redis-container -p 6379:6379 redis
+
+    - name: Check running containers
+      command: docker ps
+      register: docker_output
+
+    - name: Show docker ps output
+      debug:
+        msg: "{{ docker_output.stdout_lines }}"

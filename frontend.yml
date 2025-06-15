@@ -3,15 +3,16 @@
   become: yes
 
   vars:
-      required_ram_mb: 1024
+    required_ram_mb: 1024
+    ansible_python_interpreter: /usr/bin/python3
 
- tasks:
+  tasks:
     - name: Install NGINX only if Ubuntu
       apt:
         name: nginx
         state: present
         update_cache: yes
-        when: ansible_facts['os_family'] == "Debian"
+      when: ansible_facts['os_family'] == "Debian"
 
     - name: Ensure NGINX is running
       service:
@@ -24,9 +25,9 @@
         name: "{{ item }}"
         state: present
       loop:
-       - vim
-       - git
-       - curl
+        - vim
+        - git
+        - curl
 
     - name: Check available memory
       debug:
@@ -43,3 +44,4 @@
       service:
         name: nginx
         state: restarted
+

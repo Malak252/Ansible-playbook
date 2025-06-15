@@ -18,3 +18,5 @@ get back and test it on your VM
 ssh ubuntu@your.machine.ip
 
 now you can access your machine ssh
+
+screenshoots directory : https://github.com/Malak252/Ansible-playbook/tree/main/screenshoots

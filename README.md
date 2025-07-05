@@ -23,3 +23,9 @@ now you can access your machine ssh
 screenshoots directory : https://github.com/Malak252/Ansible-playbook/tree/main/screenshoots
 
 ## Jenkins
+
+I have created Pipline to use the Jenkinsfile with following stages:
+stage1: Build the dockerfile
+stage2: Push created Image to my registry 
+stage3: connect to Production machine and Deploy the pushed Image on it
+Trigger: use webhook to trigger in case Only pull request opned to main and in case merge

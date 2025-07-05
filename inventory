@@ -4,3 +4,9 @@ frontend-server ansible_host=16.171.39.43 ansible_user=ubuntu ansible_ssh_privat
 [docker]
 docker-server ansible_host=51.20.65.136 ansible_user=ubuntu ansible_ssh_private_key_file=/home/thecoolestmalak/.ssh/id_rsa
 
+[cicd]
+docker-server ansible_host=51.20.65.136 ansible_user=ubuntu ansible_ssh_private_key_file=/home/thecoolestmalak/.ssh/id_rsa
+
+[prod]
+frontend-server ansible_host=16.171.39.43 ansible_user=ubuntu ansible_ssh_private_key_file=/home/thecoolestmalak/.ssh/id_rsa
+

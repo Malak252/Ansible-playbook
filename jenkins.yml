@@ -1,0 +1,41 @@
+- name: install docker on all servers
+  hosts: all
+  become: true
+  tasks:
+    - name: update apt packages
+      apt:
+        update_cache: true
+
+    - name: install docker
+      apt:
+        name: docker.io
+        state: present
+
+    - name: add user to docker group
+      user:
+        name: "{{ ansible_user }}"
+        groups: docker
+        append: yes
+
+    - name: enable and start docker
+      service:
+        name: docker
+        state: started
+        enabled: true
+
+- name: set up jenkins container on CICD
+  hosts: cicd
+  become: true
+  tasks:
+    - name: pull jenkins docker image
+      command: docker pull jenkins/jenkins:lts
+
+    - name: run Jenkins container
+      command: >
+        docker run -d --name jenkins
+        -p 8080:8080 -p 50000:50000
+        -v jenkins_home:/var/jenkins_home
+        jenkins/jenkins:lts
+      args:
+        creates: /var/lib/docker/volumes/jenkins_home
+
